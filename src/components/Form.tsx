@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/Form.css";
 import ConfirmPopUp from "./ConfirmPopUp";
 import RejectionPopUp from "./RejectionPopUp";
+import FormInputs from "./FormInputs";
 const Form = () => {
   /*STATES*/
   const [confirmPopUp, setConfirmPopUp] = useState(false);
@@ -16,6 +17,18 @@ const Form = () => {
   });
 
   /*Handlers*/
+
+  function handleNameInput(value: string) {
+    setLoanInputs({ ...loanInputs, name: value });
+  }
+
+  function handlePhoneInput(value: string) {
+    setLoanInputs({ ...loanInputs, phone: value });
+  }
+
+  function handleAgeInput(value: string) {
+    setLoanInputs({ ...loanInputs, age: value });
+  }
 
   function handleSubmitBtn(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
@@ -68,6 +81,7 @@ const Form = () => {
       return false;
     }
   }
+
   return (
     <>
       <div onClick={handlePopUpClose} className="Form">
@@ -82,34 +96,20 @@ const Form = () => {
           >
             Loan Application
           </h1>
-          <label htmlFor="name">Name:</label>
-          <input
+          <FormInputs
+            label="Name"
+            handleInputChange={handleNameInput}
             value={loanInputs.name}
-            onChange={(e) =>
-              setLoanInputs({ ...loanInputs, name: e.target.value })
-            }
-            type="text"
-            id="name"
           />
-
-          <label htmlFor="Phone">Phone:</label>
-          <input
+          <FormInputs
+            label="Phone"
+            handleInputChange={handlePhoneInput}
             value={loanInputs.phone}
-            onChange={(e) =>
-              setLoanInputs({ ...loanInputs, phone: e.target.value })
-            }
-            type="text"
-            id="Phone"
           />
-
-          <label htmlFor="Age">Age:</label>
-          <input
+          <FormInputs
+            label="Age"
+            handleInputChange={handleAgeInput}
             value={loanInputs.age}
-            onChange={(e) =>
-              setLoanInputs({ ...loanInputs, age: e.target.value })
-            }
-            type="text"
-            id="Age"
           />
 
           <label htmlFor="Employee">Are you an Employee?</label>
